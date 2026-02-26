@@ -1,0 +1,16 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Copy everything
+COPY . /app
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set python path for src
+ENV PYTHONPATH=/app/src
+
+EXPOSE 5000
+
+CMD ["python", "src/Backend/backend_app.py"]

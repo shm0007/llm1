@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.26.4
+    command:
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8080"
+      - --scheme
+      - http
+    ports:
+      - "8080:8080"
+      - "50051:50051"
+    restart: on-failure:0
+    environment:
+      OPENAI_APIKEY: ${OPENAI_APIKEY}
+      QUERY_DEFAULTS_LIMIT: 1000
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
+      DEFAULT_VECTORIZER_MODULE: "text2vec-openai"
+      ENABLE_MODULES: "text2vec-openai,generative-openai"
+      CLUSTER_HOSTNAME: "node1"
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - weaviate
+    gpus: all
+    environment:
+      WEAVIATE_URL: "http://weaviate:8080"
+      OPENAI_APIKEY: ${OPENAI_APIKEY}
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "7860:7860"
+    depends_on:
+      - backend
+    environment:
+      BACKEND_URL: "http://backend:5002"
+    restart: unless-stopped
+
+volumes:
+  weaviate_data:

@@ -1,0 +1,16 @@
+
+{
+  "classes": [
+      {
+          "class": "CWE_Entry", 
+          "description": "A class to store CWE entries with vectorized embeddings",
+          "properties": [
+              {"name": "cweID", "dataType": ["string"], "description": "CWE ID"},
+              {"name": "name", "dataType": ["string"], "description": "CWE Name"},
+              {"name": "description", "dataType": ["string"], "description": "CWE Description"},
+              {"name": "extendedDescription", "dataType": ["string"], "description": "CWE Extended Description"}
+          ],
+          "vectorizer": "none"
+      }
+  ]
+}
