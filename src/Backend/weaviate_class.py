@@ -1,8 +1,8 @@
 import weaviate
-from Attack_dataset.load_attack import load_attack_data_bert, load_attack_data_openai,load_attack_data_sci_bert, load_attack_data_roberta,load_attack_data_securebert,load_attack_data_secbert,load_attack_data_ft_sci_bert,load_attack_data_ft_sec_bert,load_attack_data_ft_secure_bert,load_attack_data_ft_bert,load_attack_data_ft_roberta
-from CWE_dataset.load_cwe import load_cwe_data_bert, load_cwe_data_openai, load_cwe_data_sci_bert, load_cwe_data_secure_bert,load_cwe_data_roberta,load_cwe_data_sec_bert,load_cwe_data_ft_sci_bert,load_cwe_data_ft_sec_bert,load_cwe_data_ft_secure_bert,load_cwe_data_ft_roberta,load_cwe_data_ft_bert
-from CWE_dataset.load_cwe import load_cwe_data_v2secure_bert,load_cwe_data_gpt_oss,load_cwe_data_baai,load_cwe_data_e5,load_cwe_data_labse
-from Attack_dataset.load_attack import load_attack_data_v2_secure_bert,load_attack_data_gpt_oss,load_attack_data_baai,load_attack_data_e5,load_attack_data_labse
+from Attack_dataset.load_attack import load_attack_data_bert, load_attack_data_openai
+from CWE_dataset.load_cwe import load_cwe_data_bert, load_cwe_data_openai
+from CWE_dataset.load_cwe import load_cwe_data_gpt_oss,load_cwe_data_baai,load_cwe_data_e5,load_cwe_data_labse
+from Attack_dataset.load_attack import load_attack_data_gpt_oss,load_attack_data_baai,load_attack_data_e5,load_attack_data_labse
 import weaviate
 import json
 import os       
@@ -128,77 +128,14 @@ class WeaviateClass:
         cwe_data, cwe_embeddings = load_cwe_data_labse()
         self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
 
-    def store_sci_bert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_sci_bert()
-        cwe_data, cwe_embeddings = load_cwe_data_sci_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-
-    def store_ft_sci_bert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_ft_sci_bert()
-        cwe_data, cwe_embeddings = load_cwe_data_ft_sci_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-    def store_ft_bert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_ft_bert()
-        cwe_data, cwe_embeddings = load_cwe_data_ft_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-    def store_ft_roberta(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_ft_roberta()
-        cwe_data, cwe_embeddings = load_cwe_data_ft_roberta()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-        
-    def store_ft_sec_bert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_ft_sec_bert()
-        cwe_data, cwe_embeddings = load_cwe_data_ft_sec_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-    def store_ft_secure_bert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_ft_secure_bert()
-        cwe_data, cwe_embeddings = load_cwe_data_ft_secure_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-
-    def store_roberta(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_roberta()
-        cwe_data, cwe_embeddings = load_cwe_data_roberta()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-    def store_securebert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_securebert()
-        cwe_data, cwe_embeddings = load_cwe_data_secure_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
+   
     def store_gpt_oss(self):
         # Load data and embeddings
         attack_data, attack_embeddings = load_attack_data_gpt_oss()
         cwe_data, cwe_embeddings = load_cwe_data_gpt_oss()
         self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
     
-    def store_v2_securebert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_v2_secure_bert()
-        cwe_data, cwe_embeddings = load_cwe_data_v2secure_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-
-    def store_secbert(self):
-            
-        # Load data and embeddings
-        attack_data, attack_embeddings = load_attack_data_secbert()
-        cwe_data, cwe_embeddings = load_cwe_data_sec_bert()
-        self.store_data(attack_data, attack_embeddings , cwe_data, cwe_embeddings)
-
+   
 
     
     def store_openai(self):

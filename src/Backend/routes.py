@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from openai_api import get_openai_embedding, summarize_text, test_openai_api_key
 from bert import get_bert_embedding,get_gpt_oss_embedding,get_baai_embedding,get_e5_embedding,get_labse_embedding
-from bert import get_ft_scibert_embedding,get_ft_bert_embedding,get_ft_roberta_embedding,get_ft_secbert_embedding,get_ft_securebert_embedding,get_bert_embedding, get_scibert_embedding,get_roberta_embedding,get_securebert_embedding,get_secbert_embedding
+from bert import get_bert_embedding
 
 from weaviate_class import WeaviateClass
 import os
@@ -90,6 +90,9 @@ def get_llm(engine: str):
         torch_dtype=torch.bfloat16, # good default; FP8 models handle FP8 internally
     )
     
+
+    print("CUDA Available:", torch.cuda.is_available(),flush=True)
+    print("Model device:", next(_model.parameters()).device,flush=True  )
     _model.eval()
 
     _CURRENT_ENGINE = engine
@@ -340,6 +343,5 @@ def summarize_gpt_oss_llama():
         "Summary": summary_cwe,
     }
 
-    print(payload, flush=True)          # ✅ prints actual data
     return jsonify(payload)
 

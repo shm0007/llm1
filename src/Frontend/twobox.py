@@ -64,13 +64,13 @@ def get_backend_message_bert(message: str, mdl: str,engine: str) -> str:
 def get_summary(query: str, message: str, engine: str) -> str:
     bot_message = "Error: Attempt failed"
     try:
-        response = requests.post(f"{FLASK_BACKEND_URL}/summary?summarizer={engine}", json={"query": query, "message": message}, timeout=120)
+        response = requests.post(f"{FLASK_BACKEND_URL}/summary?summarizer={engine}", json={"query": query, "message": message}, timeout=1200)
         if response.status_code == 200:
             data = response.json()
             summary = data.get("Summary","")
             
     except Exception as e:
-        summary = f"Error: Couldn't connect to backend - {e}"
+        summary = f"New Error: Couldn't connect to backend - {e}"
     return summary
 
 
@@ -96,7 +96,7 @@ def handle_query(message: str, selected_model: str, summarizer_engine: str):
         return "Please enter a vulnerability description.", ""
 
     full_text = get_backend_message_bert(message, selected_model,summarizer_engine)
-    print(full_text,flush=True)
+    #print(full_text,flush=True)
     # Keep your top-5 extraction for later graphs
     get_top_responses(full_text)
 
@@ -109,7 +109,7 @@ def handle_summary(message: str, cwe_lists: str, summarizer_engine: str):
         return "Please enter a vulnerability description.", ""
 
     full_text = get_summary(message, cwe_lists, summarizer_engine)
-    print(full_text,flush=True)
+    #print(full_text,flush=True)
     # Keep your top-5 extraction for later graphs
     get_top_responses(full_text)
 
