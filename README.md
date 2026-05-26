@@ -330,15 +330,3 @@ Model: BGE
 ### Expected Output
 ![Gradio UI](./sample.png)
 
-## 11. File Manifest
-Please include a `manifest.json` listing every file you are sending.  
-For each file, include:
-
-- [ ] File name  
-- [ ] File size  
-- [ ] File type (e.g., `.tar`, `.py`, `.txt`, `.json`)  
-- [ ] Description of what the file is used for  
-- [ ] Version (if applicable)  
-- [ ] Checksums (optional but very helpful)
-
-Will be included in the github repo
