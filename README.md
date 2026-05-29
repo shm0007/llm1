@@ -42,8 +42,6 @@ Backend → Weaviate Vector Database → Backend → LLM → Frontend → User
 
 ## 2.1 Docker Images
 
-The application is delivered as **Docker image `.tar` files**.
-
 The system consists of three containers:
 
 - llm1-backend
@@ -198,42 +196,6 @@ The backend downloads models once and caches them locally.
 
 # 7. Local Run Instructions
 
-## Running Using Provided Docker Images
-
-Step 1 — Load Images
-
-`docker load -i llm1-backend.tar`
-`docker load -i llm1-frontend.tar`  
-`docker load -i weaviate-1.26.4.tar`
-
-Step 2 — Start System
-
-`docker-compose up`
-
-Step 3 — Access UI
-
-http://localhost:7860
-
-Step 4 — Verify Backend
-
-`curl http://localhost:5002/health`
-
-Expected:
-
-`{{"status":"ok"}}`
-
-Step 5 — Verify Weaviate
-
-`curl http://localhost:8080/v1/.well-known/ready`
-
-Expected:
-
-READY
-
----
-
-## Running Using Docker Compose (Build Locally)
-
 1. Navigate to project root
 2. Create `.env` file with this variable:
 
@@ -246,6 +208,26 @@ HF_TOKEN=<your_huggingface_token>
 4. Start services
 
 `docker-compose up`
+
+5. — Access UI
+
+http://localhost:7860
+
+6. — Verify Backend
+
+`curl http://localhost:5002/health`
+
+Expected:
+
+`{{"status":"ok"}}`
+
+7. — Verify Weaviate
+
+`curl http://localhost:8080/v1/.well-known/ready`
+
+Expected:
+
+READY
 
 
 
